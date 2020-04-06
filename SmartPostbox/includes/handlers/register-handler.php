@@ -1,6 +1,4 @@
-<?php 
-
-
+<?php
 
 function sanitizeFormString($inputText) {
     $inputText = strip_tags($inputText);
@@ -19,6 +17,8 @@ if(isset($_POST['registerButton'])) {
     $email = sanitizeFormString($_POST['email']);
     $password = sanitizeFormPassword($_POST['password']);
     $password2 = sanitizeFormPassword($_POST['password2']);
+
+    $account->register( $email, $password, $password2);
 }
 
 
