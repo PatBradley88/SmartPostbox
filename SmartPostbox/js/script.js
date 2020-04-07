@@ -34,11 +34,10 @@ $(document).ready(function(){
         var distance = readings['distance'];
         console.log(distance);
 
-        if (distance < 10) {
+        if (distance < 10 && distance != 0) {
             document.getElementById("postbox").innerHTML = "You've got Mail!";
           } else {
               document.getElementById("postbox").innerHTML = "Postbox Empty!";
-              console.log("Msg change worked");
           }
         $('#temperature_value').text(readings['temperature']);
         $('#humidity_value').text(readings['humidity']);

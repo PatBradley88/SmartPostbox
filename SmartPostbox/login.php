@@ -1,10 +1,18 @@
 <?php
+include("includes/config.php");
 include("includes/classes/Account.php");
 
-$account = new Account();
+$account = new Account($con);
 
 include("includes/handlers/register-handler.php");
 include("includes/handlers/login-handler.php");
+
+function getInputValue($name) {
+    if(isset($_POST[$name])) {
+        echo $_POST[$name];
+    }
+}
+
 ?>
 
 
@@ -48,10 +56,14 @@ include("includes/handlers/login-handler.php");
                     <form action="login.php" method="POST">
                         <div class="inputs">
                             <div class="input">
-                                <input type="email" name="email" placeholder="Email" required>
+                                <?php echo $account->getError("Email is invalid"); ?>
+                                <input type="email" name="email" placeholder="Email" value="<?php getInputValue('email') ?>" required>
                                 <img src="img/mail.svg">
                             </div>
                             <div class="input">
+                                <?php echo $account->getError("Your passwords do not match"); ?>
+                                <?php echo $account->getError("Password can only contain numbers and letters"); ?>
+                                <?php echo $account->getError("Passwords must be between 5 and 30 characters"); ?>
                                 <input type="password" name="password" placeholder="Password">
                                 <img src="img/pass.svg">
                             </div>

@@ -1,13 +1,17 @@
 <?php
-	class Acocunt {
+	class Account {
 
-		public function __construct() {
+		private $con;
+		private $errorArray;
 
+		public function __construct($con) {
+			$this->con = $con;
+			$this->errorArray = array();
 		}
 
 		public function register($em, $pw, $pw2) {
 			$this->validateEmails($em);
-			$this->validatePasswords($pw, $pw2);
+			$this->validatePassword($pw, $pw2);
 
 			if (empty($this->errorArray) == true) {
 				//Insert into DB
@@ -17,28 +21,44 @@
 			}
 		}
 
+		public function getError($error) {
+			if(!in_array($error, $this->errorArray)) {
+				$error = "";
+			}
+			return "<span class='errorMessage'>$error</span>";
+		}
+
+		private function insertUserDetails($em, $pw) {
+			$encryptedPw = md5($pw);
+			$date = date("Y-m-d");
+
+			$result = mysqli_query($this->con, "INSERT INTO users VALUES ('', '$em', '$encryptedPw', '$date')");
+
+			return $result;
+		}
+
 		private function validateEmails($em) {
 			if(!filter_var($em, FILTER_VALIDATE_EMAIL)) {
-				array_push($this->errorArray, "Email is not valid");
+				array_push($this->errorArray, "Email is invalid");
 				return;
 			}
 
 			//TODO: Check that username has not already been used.
 		}
 
-		private function validatePasswords($pw, $pw2) {
+		private function validatePassword($pw, $pw2) {
 		    if ($pw != $pw2) {
-				array_push($this->errorArray, Constants::$passwordsDoNotMatch);
+				array_push($this->errorArray, "Your passwords do not match");
 				return;
 			}
 
 			if (preg_match('/[^A-Za-z0-9]/', $pw)) {
-				array_push($this->errorArray, Constants::$passwordMustBeAlphaNumeric);
+				array_push($this->errorArray, "Password can only contain numbers and letters");
 				return;
 			}
 
 			if(strlen($pw) > 30 || strlen($pw) < 5) {
-				array_push($this->errorArray, Constants::$passwordCharacters);
+				array_push($this->errorArray, "Passwords must be between 5 and 30 characters");
 				return;
 			}
 		}
