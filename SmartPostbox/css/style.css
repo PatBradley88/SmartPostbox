@@ -8,12 +8,12 @@
 
 body {
     font-family: 'Roboto', sans-serif;
-    background: lightskyblue url('https://i.pinimg.com/originals/3c/24/46/3c24462450c2a902bf7e18f3d9aada81.jpg');
     color: #fff;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
     height: 100vh;
+    /* 'https://i.pinimg.com/originals/3c/24/46/3c24462450c2a902bf7e18f3d9aada81.jpg' */
 }
 
 .container {
@@ -22,11 +22,17 @@ body {
     overflow: auto;
 }
 
-.container h3 {
+.container h2 {
     text-align: center;
     font-family: 'Lobster', cursive;
+    color: #F8EFBA;
     letter-spacing: 2px;
-    font-size: larger;
+    font-size: xx-large;
+    text-shadow:
+                -1px -1px 0 #27ae60,
+                1px -1px 0 #27ae60,
+                -1px 1px 0 #27ae60,
+                1px 1px 0 #27ae60;
 }
 
 header {
@@ -35,19 +41,51 @@ header {
     display: flex;
     align-items: center;
     justify-content: center;
+    background: linear-gradient(
+        to right bottom,
+        rgba(233, 241, 232, 0.8), 
+        rgba(121, 235, 195, 0.8)), 
+        url('../img/mailbox.jpg');
+    background-size: cover;
+}
+
+.logo {
+    /* background: url('img/logo.png'); */
+    text-align: center;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-top: 20;
+    margin-left: 130;
+    margin-bottom: 20px;
+    box-shadow:
+    /* logo shadow */
+    0px 0px 2px #5f5f5f,
+    /* offset */
+    0px 0px 0px 5px #ecf0f3,
+    /* bottom right */
+    8px 8px 15px #a7aaaf,
+    /* top left */
+    -8px -8px 15px #ffffff;
 }
 
 header h1 {
     font-size: 60px;
+    color: #F8EFBA;
     display: block;
     font-family: 'Do Hyeon', sans-serif;
+    text-shadow:
+                -1px -1px 0 #27ae60,
+                1px -1px 0 #27ae60,
+                -1px 1px 0 #27ae60,
+                1px 1px 0 #27ae60;
 }
 
 .counters {
     background: #27ae60;
     color: #fff;
     padding: 40px 20px;
-    border-top: 3px lightskyblue solid;
+    border-top: 3px #F8EFBA solid;
 }
 
 .counters .container {
@@ -73,7 +111,7 @@ header h1 {
     }
 
     .counters .container > div:nth-of-type(1),.counters .container > div:nth-of-type(2) {
-        border-bottom: 1px lightskyblue solid;
+        border-bottom: 1px #F8EFBA solid;
         padding-bottom: 20px;
     }
 }
@@ -102,7 +140,7 @@ a {
     font-family: 'Do Hyeon', sans-serif;
     padding: 25px 30px;
     margin: 40px 0;
-    color: #03f40f;
+    color: #27ae60;
     font-size: 24px;
     text-decoration: none;
     text-transform: uppercase;
@@ -119,12 +157,12 @@ a:nth-child(1) {
 }
 
 a:hover {
-    background: #03f40f;
-    color: #050801;
-    box-shadow: 0 0 5px #03f40f,
-                0 0 25px #03f40f,
-                0 0 50px #03f40f,
-                0 0 200px #03f40f;
+    background: #27ae60;
+    color: #F8EFBA;
+    box-shadow: 0 0 5px #27ae60,
+                0 0 25px #27ae60,
+                0 0 50px #27ae60,
+                0 0 200px #27ae60;
 }
 
 a span {
@@ -137,7 +175,7 @@ a span:nth-child(1) {
     left: 0;
     width: 100%;
     height: 2px;
-    background: linear-gradient(90deg,transparent,#03f40f);
+    background: linear-gradient(90deg,transparent,#27ae60);
     animation: animate1 1s linear infinite;
 }
 
@@ -155,7 +193,7 @@ a span:nth-child(2) {
     right: 0;
     width: 2px;
     height: 100%;
-    background: linear-gradient(180deg,transparent,#03f40f);
+    background: linear-gradient(180deg,transparent,#27ae60);
     animation: animate2 2s linear infinite;
     animation-delay: 0.25s;
 }
@@ -174,7 +212,7 @@ a span:nth-child(3) {
     right: -100%;
     width: 100%;
     height: 2px;
-    background: linear-gradient(270deg,transparent,#03f40f);
+    background: linear-gradient(270deg,transparent,#27ae60);
     animation: animate3 1s linear infinite;
     animation-delay: 0.25s;
 }
@@ -193,7 +231,7 @@ a span:nth-child(4) {
     left: 0;
     width: 2px;
     height: 100%;
-    background: linear-gradient(360deg,transparent,#03f40f);
+    background: linear-gradient(360deg,transparent,#27ae60);
     animation: animate4 1s linear infinite;
     animation-delay: 0.75s;
 }
