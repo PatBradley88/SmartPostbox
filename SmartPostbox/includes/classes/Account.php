@@ -9,6 +9,17 @@
 			$this->errorArray = array();
 		}
 
+		public function login($em, $pw) {
+			$pw = md5($pw);
+			$query = mysqli_query($this->con, "SELECT * FROM users WHERE email='$em' AND password='$pw'");
+			if(mysqli_num_rows($query) == 1) {
+				return true;
+			} else {
+				array_push($this->errorArray, "Login failed");
+				return false;
+			}
+		}
+
 		public function register($em, $pw, $pw2) {
 			$this->validateEmails($em);
 			$this->validatePassword($pw, $pw2);
@@ -43,7 +54,11 @@
 				return;
 			}
 
-			//TODO: Check that username has not already been used.
+			$checkEmailQuery = mysqli_query($this->con, "SELECT email FROM users WHERE email='$em'");
+			if(mysqli_num_rows($checkEmailQuery) != 0) {
+				array_push($this->errorArray, "This email is aleady in use.");
+				return;
+			}
 		}
 
 		private function validatePassword($pw, $pw2) {

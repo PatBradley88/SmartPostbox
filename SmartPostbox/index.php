@@ -1,3 +1,17 @@
+<?php
+include("includes/config.php");
+
+//session_destroy();
+
+if(isset($_SESSION['userLoggedIn'])) {
+    $userLoggedIn = $_SESSION['userLoggedIn'];
+}
+else {
+    header("Location: login.php");
+}
+?>
+
+
 <html>
     <head>
         <meta charset="UTF-8">
@@ -18,6 +32,14 @@
     </head>
     <body>
         <header>
+            <div class="right"><input type="checkbox" onclick="logout()" checked ></div>
+            <script>
+            function logout() {
+                $.post("includes/handlers/ajax/logout.php", function() {
+                location.reload();
+                });
+            }
+            </script>
             <div class="container">
                 <img src="img/logo.png" class="logo">
                 <h1>Smart Postbox</h1>

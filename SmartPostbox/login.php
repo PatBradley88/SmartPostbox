@@ -39,6 +39,7 @@ function getInputValue($name) {
                     <form action="login.php" method="POST">
                         <div class="inputs">
                             <div class="input">
+                                <?php echo $account->getError("Login failed"); ?>
                                 <input type="email" name="email" placeholder="Email" required>
                                 <img src="img/mail.svg">
                             </div>
@@ -57,6 +58,7 @@ function getInputValue($name) {
                         <div class="inputs">
                             <div class="input">
                                 <?php echo $account->getError("Email is invalid"); ?>
+                                <?php echo $account->getError("This email is aleady in use"); ?>
                                 <input type="email" name="email" placeholder="Email" value="<?php getInputValue('email') ?>" required>
                                 <img src="img/mail.svg">
                             </div>

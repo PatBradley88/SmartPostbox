@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    let cache = (localStorage.getItem('data') == undefined 
+    let cache = (localStorage.getItem('data') == undefined
             || localStorage.getItem('data') == null) ? {
         'timestamp': '',
         'light' : 0,
