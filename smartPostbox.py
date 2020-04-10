@@ -47,7 +47,7 @@ time_to_sleep       = 10        # The main loop runs every 10 seconds.
 def read_light_sensor():
     light_level = grovepi.analogRead(light_sensor)
     return(light_level)
-    
+
 def read_ultrasonic_ranger():
     distant = ultrasonicRead(ultrasonic_ranger)
     print(distant, 'cm')
@@ -65,26 +65,26 @@ def read_temp_humidity_sensor():
             #Return -1 in case of bad temp/humidity sensor reading
         if math.isnan(temp) or math.isnan(humidity):        #temp/humidity sensor sometimes gives nan
             return [-1,-1,-1]
-            
+
         return [temp,humidity]
 
     except (IOError,TypeError) as e:
             return [-1,-1,-1]
-    
+
 def on_connect(client, userdata, flags, reasonCode, properties):
     print('Connected to MQTT Broker')
     print('Connection flags=%s' % flags)
     print('Reason Code=%s' % reasonCode)
     print('Properties=%s' % properties)
-    
+
 def on_publish(client, userdata, mid):
     print('Published to=%s' % mid)
-    
+
 def on_subscribe(client, userdata, mid, reasonCode, properties):
     print('Subscribed to=%s' % mid)
     print('Reason Code=%s' % reasonCode)
     print('Properties=%s' % properties)
-    
+
 def on_message(client, userdata, message):
     str_message = str(message.payload.decode('utf-8'))
     print('Message received=%s' % str_message)
@@ -93,7 +93,7 @@ def on_message(client, userdata, message):
     message = json.loads(str_message) #pass the message as json
     global publishing
     global publishing_thread
-    
+
     if message.get('terminate'):
         global terminate
         global listening
@@ -114,37 +114,37 @@ def on_message(client, userdata, message):
         else:
             publishing = False
             print("Not Publishing")
-                
+
     #except ValuerError as value_error:
     #    print('Message received has wrong formed data object')
     #except Exception as error:
     #    print ('An error occurred')
     #    print (error)
-        
-        
+
+
 def on_disconnect(client, userdata, reasonCode, properties):
     #need to add functionality
-    
+
     print('Disconnected from MQTT Broker')
     print('Reascon Code =%s' % reasonCode)
     print('Properties=%s' % properties)
-    
+
 def on_socket_close(client, userdata, reasonCode, properties):
     #add functionality
-    
+
     print('MQTT Broker Socket Closed')
     print('Reason Code=%s' % reasonCode)
     print('Properties=%s' % properties)
-    
+
 def on_socket_unregister_write(client, userdata, reasonCode, properties):
     #add functionality
     print('MQTT Broker Socket Closed')
     print('Reason Code=%s' % reasonCode)
     print('Properties=%s' % properties)
-    
+
 def publish():
      #reading all sensors and publishing on mqtt broker
-    
+
     client = start_client(PUBLISH_CLIENT_ID)
     global publishing
     while publishing:

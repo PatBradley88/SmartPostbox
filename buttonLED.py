@@ -27,11 +27,16 @@ def listen():
         print("")
 
         try:
-            if int(button_pressed) == 1:
-                print("On")
-                brightness = 255
-                grovepi.analogWrite(led,brightness) # Give PWM output to LED
-            else:
+            # if int(button_pressed) == 1:
+            #     print("On")
+            #     brightness = 255
+            #     grovepi.analogWrite(led,brightness) # Give PWM output to LED
+            # else:
+            #     print("Off")
+            #     brightness = 0
+            #     grovepi.analogWrite(led,brightness) # Give PWM output to LED
+
+            if int(button_pressed) == 0:
                 print("Off")
                 brightness = 0
                 grovepi.analogWrite(led,brightness) # Give PWM output to LED
